@@ -47,19 +47,26 @@ const ModalComponent = (props: IProps) => {
     await API.put(`/simulate/${props.data.id}`)
       .then((resp) => {
         setIsLoading(false)
-        toast.success(`${resp.data.message}`)
+        toast.success(`${resp.data.message}`, {
+          autoClose: 2500,
+          onClose: () => window.location.reload(false),
+        })
         closeModal()
       })
       .catch((e) => {
         setIsLoading(false)
-        toast.error("Algo deu errado!")
+        toast.error("Algo deu errado!", {
+          autoClose: 2500,
+          onClose: () => window.location.reload(false),
+        })
         closeModal()
       })
   }
 
   let rows = []
+  const parcels = props.data.month_quant <= 3 ? props.data.month_quant : 3
 
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= parcels; i++) {
     rows.push({
       id: i,
       date: moment().add(i, "months").calendar(),
@@ -73,6 +80,7 @@ const ModalComponent = (props: IProps) => {
       ariaHideApp={false}
       contentLabel="Request Loan"
     >
+      {console.log(">>>show", isShow)}
       <ModalStyles>
         <h2 className="titleModal">
           Veja a simulação para o seu empréstimo antes de efetivar{" "}
@@ -144,7 +152,7 @@ const ModalComponent = (props: IProps) => {
             <button
               type="button"
               className="btnClose font-white"
-              onClick={closeModal}
+              onClick={() => window.location.reload(false)}
             >
               Cancelar
             </button>
