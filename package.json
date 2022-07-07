@@ -15,7 +15,7 @@
     "@types/react-select": "^3.0.13",
     "@types/styled-components": "^5.1.0",
     "axios": "^0.19.2",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.7.2",
